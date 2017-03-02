@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class TableViewControllerBucketList: UITableViewController {
     
     var bucketArray: [BucketWishes] = []
+    var ref: FIRDatabaseReference!
     
     @IBOutlet weak var TextFieldOutlet: UITextField!
     
     @IBAction func AddWish(_ sender: Any) {
 //        bucketListSilvia.append(TextFieldOutlet.text!)
+        
+        // TODO: add default initializer to BucketWishes class
+//        var wishToAdd = BucketWishes()
+//        wishToAdd.wish = TextFieldOutlet.text
+//        wishToAdd.place = TODO
+//        wishToAdd.when = TODO
+//        
+//        DataProvider.sharedInstance.addWish(wishToAdd)
         self.tableView.reloadData()
     }
     
@@ -34,8 +44,8 @@ class TableViewControllerBucketList: UITableViewController {
                                                name:  NSNotification.Name(rawValue: "BucketWishesnotify" ),
                                                object: nil)
         
-        DataProvider.sharedInstance.getBucketListData()
-
+        ref = DataProvider.sharedInstance.getBucketListData()
+        self.addRemoveChild()
     }
     
     func notifyObservers(notification: NSNotification) {
@@ -102,16 +112,23 @@ class TableViewControllerBucketList: UITableViewController {
     func addRemoveChild(){
         
         // Listen for new comments in the Firebase database
-        commentsRef.observe(.childAdded, with: { (snapshot) -> Void in
-            self.comments.append(snapshot)
-            self.tableView.insertRows(at: [IndexPath(row: self.comments.count-1, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
+        ref.observe(.childAdded, with: { (snapshot) -> Void in
+            if let wishObj = snapshot.value as? NSDictionary {
+                if let wishAdded = BucketWishes(dictionary: wishObj) {
+                    self.bucketArray.append(wishAdded)
+                    
+                    self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+                }
+            }
         })
-        // Listen for deleted comments in the Firebase database
-        commentsRef.observe(.childRemoved, with: { (snapshot) -> Void in
-            let index = self.indexOfMessage(snapshot)
+        
+        // TODO: Listen for deleted comments in the Firebase database
+        /*ref.observe(.childRemoved, with: { (snapshot) -> Void in
+         // TODO: add "indexOfWish" method to the view controller
+            let index = self.indexOfWish(snapshot)
             self.comments.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
-        })
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+        })*/
     }
     
     

@@ -17,7 +17,7 @@ class DataProvider {
     
     var ref: FIRDatabaseReference!
     
-    public func getBucketListData() {
+    public func getBucketListData() -> FIRDatabaseReference {
         ref = FIRDatabase.database().reference() //Stores a link to firebase for your database.
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -43,6 +43,23 @@ class DataProvider {
                 print("Error while retrieving data from Firebase")
             }
         })
+        
+        return ref.child("BucketWishesDict")
+    }
+    
+    public func addWish(_ newWish: BucketWishes) {
+        guard let wish = newWish.wish else
+        {
+            print("ERROR: Trying to save empty wish!")
+            return
+        }
+
+        var wishObj = Dictionary<String, Any>()
+        wishObj["Wish"] = newWish.wish!
+        wishObj["Place"] = newWish.place ?? "Somewhere"
+        wishObj["When"] = newWish.when ?? 2020
+        
+        ref.child("BucketWishesDict").child(wish).setValue(wishObj)
     }
     
     func convertData(_ wishesArray: [BucketWishes]) {
