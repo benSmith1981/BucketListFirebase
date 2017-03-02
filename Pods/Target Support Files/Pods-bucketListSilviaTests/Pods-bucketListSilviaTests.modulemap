@@ -1,0 +1,6 @@
+framework module Pods_bucketListSilviaTests {
+  umbrella header "Pods-bucketListSilviaTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
