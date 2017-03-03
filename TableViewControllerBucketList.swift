@@ -14,9 +14,10 @@ class TableViewControllerBucketList: UITableViewController {
     var bucketArray: [BucketWishes] = []
     var ref: FIRDatabaseReference!
     
-    @IBOutlet weak var TextFieldOutlet: UITextField!
-    
+    @IBOutlet weak var wishTitle: UITextField!
+    @IBOutlet weak var wishYear: UITextField!
     @IBAction func AddWish(_ sender: Any) {
+        
 //        bucketListSilvia.append(TextFieldOutlet.text!)
         
         // TODO: add default initializer to BucketWishes class
