@@ -15,8 +15,17 @@ import Foundation
 public class BucketWishes {
 	public var wish : String?
 	public var place : String?
-	public var when : Int?
+	public var when : String?
+    public var id : String?
 
+    
+    init(wish: String, place: String, when: String, id: String) {
+        
+        self.wish = wish
+        self.when = when
+        self.place = place
+        self.id = id
+    }
 /**
     Returns an array of models based on given dictionary.
     
@@ -49,9 +58,11 @@ public class BucketWishes {
 */
 	required public init?(dictionary: NSDictionary) {
 
-		wish = dictionary["Wish"] as? String
-		place = dictionary["Place"] as? String
-		when = dictionary["When"] as? Int
+		wish = dictionary["what"] as? String
+		place = dictionary["where"] as? String
+		when = dictionary["when"] as? String
+        id = dictionary["id"] as? String
+
 	}
 
 		
@@ -64,9 +75,10 @@ public class BucketWishes {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.wish, forKey: "Wish")
-		dictionary.setValue(self.place, forKey: "Place")
-		dictionary.setValue(self.when, forKey: "When")
+		dictionary.setValue(self.wish, forKey: "what")
+		dictionary.setValue(self.place, forKey: "where")
+		dictionary.setValue(self.when, forKey: "when")
+        dictionary.setValue(self.id, forKey: "id")
 
 		return dictionary
 	}

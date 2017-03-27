@@ -88,8 +88,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="TextFieldOutlet" destination="94K-dE-tSr" id="RFn-Wz-u2a"/>
                         <outlet property="wishTitle" destination="Y0e-WM-vr5" id="sTm-lb-3nD"/>
+                        <outlet property="wishWhere" destination="LIH-e4-O5Z" id="Cco-kb-3AR"/>
+                        <outlet property="wishYear" destination="94K-dE-tSr" id="4Y6-Xb-cEI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RKd-mH-d1B" userLabel="First Responder" sceneMemberID="firstResponder"/>

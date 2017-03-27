@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>586797398568-uuv9ojc79l4bgabacrujcncls9bsp2ul.apps.googleusercontent.com</string>
+	<string>505769325946-j5pd1a9qr0nvnp3pvhnj1ro8eeduabda.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.586797398568-uuv9ojc79l4bgabacrujcncls9bsp2ul</string>
+	<string>com.googleusercontent.apps.505769325946-j5pd1a9qr0nvnp3pvhnj1ro8eeduabda</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCxenRzOXj6uviOYE3ECJ62uhNAP3PgwKk</string>
+	<string>AIzaSyBGQ19eHI4QERnKnYn2cOHpj0Ccgyhrzqs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>586797398568</string>
+	<string>505769325946</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>nl.deBie.bucketListSilvia</string>
+	<string>com.bensmith.bucketlist</string>
 	<key>PROJECT_ID</key>
-	<string>bucketlistapp-60977</string>
+	<string>bucketlist-25bf7</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bucketlistapp-60977.appspot.com</string>
+	<string>bucketlist-25bf7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:586797398568:ios:75b594ebffbdb59c</string>
+	<string>1:505769325946:ios:4f819c28ec4b7558</string>
 	<key>DATABASE_URL</key>
-	<string>https://bucketlistapp-60977.firebaseio.com</string>
+	<string>https://bucketlist-25bf7.firebaseio.com</string>
 </dict>
 </plist>

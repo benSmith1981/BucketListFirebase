@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E6A5463713560CF5D4CAD9D /* Pods_bucketListSilviaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B4C50BA303DFE31B9BC3C4 /* Pods_bucketListSilviaTests.framework */; };
 		2E91A11B6047E66414611FD3 /* Pods_bucketListSilviaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49E3A56A1C1972CCECD7995 /* Pods_bucketListSilviaUITests.framework */; };
-		60136F6C1E66CB2900376EE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60136F6B1E66CB2900376EE6 /* GoogleService-Info.plist */; };
 		60136F6F1E66D91600376EE6 /* BucketWishes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60136F6E1E66D91600376EE6 /* BucketWishes.swift */; };
 		60136F711E66DA8200376EE6 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60136F701E66DA8200376EE6 /* DataProvider.swift */; };
 		6013C4211E630A7C000A50C7 /* bucketListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6013C41F1E630A7C000A50C7 /* bucketListTableViewCell.swift */; };
@@ -21,6 +20,7 @@
 		609C4A201E50E26700E0C044 /* bucketListSilviaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C4A1F1E50E26700E0C044 /* bucketListSilviaTests.swift */; };
 		609C4A2B1E50E26700E0C044 /* bucketListSilviaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C4A2A1E50E26700E0C044 /* bucketListSilviaUITests.swift */; };
 		609C4A391E50E2B800E0C044 /* TableViewControllerBucketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C4A381E50E2B800E0C044 /* TableViewControllerBucketList.swift */; };
+		BECB0F8D1E88F8890098F5D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BECB0F8C1E88F8890098F5D3 /* GoogleService-Info.plist */; };
 		EAA49DE0648BCE12071373FF /* Pods_bucketListSilvia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D023DDE9AB7932F0C140F538 /* Pods_bucketListSilvia.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,6 @@
 		30160339EECB0BD194BB4EE7 /* Pods-bucketListSilvia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bucketListSilvia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bucketListSilvia/Pods-bucketListSilvia.debug.xcconfig"; sourceTree = "<group>"; };
 		42B4C50BA303DFE31B9BC3C4 /* Pods_bucketListSilviaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bucketListSilviaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E225D74A83E5915A6D14CCB /* Pods-bucketListSilviaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bucketListSilviaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bucketListSilviaTests/Pods-bucketListSilviaTests.release.xcconfig"; sourceTree = "<group>"; };
-		60136F6B1E66CB2900376EE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		60136F6E1E66D91600376EE6 /* BucketWishes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketWishes.swift; sourceTree = "<group>"; };
 		60136F701E66DA8200376EE6 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		6013C41F1E630A7C000A50C7 /* bucketListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bucketListTableViewCell.swift; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		609C4A381E50E2B800E0C044 /* TableViewControllerBucketList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewControllerBucketList.swift; path = ../TableViewControllerBucketList.swift; sourceTree = "<group>"; };
 		6451CB0A70691A6C50A3EC68 /* Pods-bucketListSilviaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bucketListSilviaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bucketListSilviaUITests/Pods-bucketListSilviaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B7D36EBE095C5CC7417A95FB /* Pods-bucketListSilvia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bucketListSilvia.release.xcconfig"; path = "Pods/Target Support Files/Pods-bucketListSilvia/Pods-bucketListSilvia.release.xcconfig"; sourceTree = "<group>"; };
+		BECB0F8C1E88F8890098F5D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C49E3A56A1C1972CCECD7995 /* Pods_bucketListSilviaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bucketListSilviaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D023DDE9AB7932F0C140F538 /* Pods_bucketListSilvia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bucketListSilvia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC360F7154A39D51C2B9671 /* Pods-bucketListSilviaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bucketListSilviaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bucketListSilviaUITests/Pods-bucketListSilviaUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +133,7 @@
 		609C4A091E50E26700E0C044 /* bucketListSilvia */ = {
 			isa = PBXGroup;
 			children = (
+				BECB0F8C1E88F8890098F5D3 /* GoogleService-Info.plist */,
 				609C4A0A1E50E26700E0C044 /* AppDelegate.swift */,
 				609C4A381E50E2B800E0C044 /* TableViewControllerBucketList.swift */,
 				609C4A131E50E26700E0C044 /* LaunchScreen.storyboard */,
@@ -140,7 +141,6 @@
 				6013C4201E630A7C000A50C7 /* bucketListTableViewCell.xib */,
 				609C4A0E1E50E26700E0C044 /* Main.storyboard */,
 				609C4A161E50E26700E0C044 /* Info.plist */,
-				60136F6B1E66CB2900376EE6 /* GoogleService-Info.plist */,
 				609C4A111E50E26700E0C044 /* Assets.xcassets */,
 				60136F6D1E66D8F400376EE6 /* DataLayer */,
 			);
@@ -265,7 +265,7 @@
 				TargetAttributes = {
 					609C4A061E50E26700E0C044 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 6CB7HT7995;
+						DevelopmentTeam = CWK29L7ZPT;
 						ProvisioningStyle = Automatic;
 					};
 					609C4A1A1E50E26700E0C044 = {
@@ -309,7 +309,7 @@
 			files = (
 				609C4A151E50E26700E0C044 /* LaunchScreen.storyboard in Resources */,
 				6013C4221E630A7C000A50C7 /* bucketListTableViewCell.xib in Resources */,
-				60136F6C1E66CB2900376EE6 /* GoogleService-Info.plist in Resources */,
+				BECB0F8D1E88F8890098F5D3 /* GoogleService-Info.plist in Resources */,
 				609C4A121E50E26700E0C044 /* Assets.xcassets in Resources */,
 				609C4A101E50E26700E0C044 /* Main.storyboard in Resources */,
 			);
@@ -631,10 +631,10 @@
 			baseConfigurationReference = 30160339EECB0BD194BB4EE7 /* Pods-bucketListSilvia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6CB7HT7995;
+				DEVELOPMENT_TEAM = CWK29L7ZPT;
 				INFOPLIST_FILE = bucketListSilvia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.deBie.bucketListSilvia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensmith.bucketlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -645,10 +645,10 @@
 			baseConfigurationReference = B7D36EBE095C5CC7417A95FB /* Pods-bucketListSilvia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6CB7HT7995;
+				DEVELOPMENT_TEAM = CWK29L7ZPT;
 				INFOPLIST_FILE = bucketListSilvia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.deBie.bucketListSilvia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bensmith.bucketlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

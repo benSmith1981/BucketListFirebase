@@ -16,18 +16,27 @@ class TableViewControllerBucketList: UITableViewController {
     
     @IBOutlet weak var wishTitle: UITextField!
     @IBOutlet weak var wishYear: UITextField!
+    @IBOutlet weak var wishWhere: UITextField!
     @IBAction func AddWish(_ sender: Any) {
         
 //        bucketListSilvia.append(TextFieldOutlet.text!)
         
         // TODO: add default initializer to BucketWishes class
-//        var wishToAdd = BucketWishes()
-//        wishToAdd.wish = TextFieldOutlet.text
-//        wishToAdd.place = TODO
-//        wishToAdd.when = TODO
-//        
-//        DataProvider.sharedInstance.addWish(wishToAdd)
+        var wishToAdd = BucketWishes.init(wish: wishTitle.text!, place: wishYear.text!, when: wishWhere.text!, id: "")
+        
+        DataProvider.sharedInstance.addWish(wishToAdd)
         self.tableView.reloadData()
+    }
+    
+    func random(length: Int = 20) -> String {
+        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString: String = ""
+        
+        for _ in 0..<length {
+            let randomValue = arc4random_uniform(UInt32(base.characters.count))
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+        }
+        return randomString
     }
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -53,7 +62,7 @@ class TableViewControllerBucketList: UITableViewController {
         var bucketlistDictionary: Dictionary<String,[BucketWishes]> = notification.userInfo as! Dictionary<String,[BucketWishes]>
         bucketArray = bucketlistDictionary["BucketWishes"]! //showFestivalsOnMap()
         
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,9 +111,12 @@ class TableViewControllerBucketList: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            bucketArray.remove(at: indexPath.row)
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            DataProvider.sharedInstance.removeWish(bucketArray[indexPath.row])
+
+//            bucketArray.remove(at: indexPath.row)
+//            // Delete the row from the data source
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -115,48 +127,41 @@ class TableViewControllerBucketList: UITableViewController {
         // Listen for new comments in the Firebase database
         ref.observe(.childAdded, with: { (snapshot) -> Void in
             if let wishObj = snapshot.value as? NSDictionary {
-                if let wishAdded = BucketWishes(dictionary: wishObj) {
-                    self.bucketArray.append(wishAdded)
-                    
-                    self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
-                }
+                let bucketWish = BucketWishes.init(wish: wishObj["what"] as! String,
+                                                     place: wishObj["where"] as! String,
+                                                     when: wishObj["when"] as! String,
+                                                     id: snapshot.key)
+                self.bucketArray.append(bucketWish)
+                
+                self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+                
             }
         })
         
         // TODO: Listen for deleted comments in the Firebase database
-        /*ref.observe(.childRemoved, with: { (snapshot) -> Void in
-         // TODO: add "indexOfWish" method to the view controller
-            let index = self.indexOfWish(snapshot)
-            self.comments.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-        })*/
+        ref.observe(.childRemoved, with: { (snapshot) -> Void in
+            if let wishObj = snapshot.value as? NSDictionary {
+                let wishremoved = BucketWishes.init(wish: wishObj["what"] as! String,
+                                                   place: wishObj["where"] as! String,
+                                                   when: wishObj["when"] as! String,
+                                                   id: snapshot.key)
+                if let index = self.indexOfWish(wishRemoved: wishremoved) {
+                    self.bucketArray.remove(at: index)
+                    self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+                }
+                
+            }
+        })
+
     }
-    
-    
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    func indexOfWish(wishRemoved: BucketWishes) -> Int? {
+        for (index, wish) in bucketArray.enumerated() {
+            if  wish.id == wishRemoved.id {
+                return index
+            }
+        }
+        return nil
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
