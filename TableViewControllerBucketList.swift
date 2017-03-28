@@ -17,12 +17,30 @@ class TableViewControllerBucketList: UITableViewController {
     @IBOutlet weak var wishTitle: UITextField!
     @IBOutlet weak var wishYear: UITextField!
     @IBOutlet weak var wishWhere: UITextField!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let nib = UINib(nibName: "bucketListTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "bucketListTableViewCell")
+        
+        // Register to receive notification data // Hieronder stemt Notification af op het keywoord "BucketWishesnotify".
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(TableViewControllerBucketList.notifyObservers),
+                                               name:  NSNotification.Name(rawValue: "BucketWishesnotify" ),
+                                               object: nil)
+        
+        ref = DataProvider.sharedInstance.getBucketListData()
+        self.addRemoveChild()
+    }
+    
     @IBAction func AddWish(_ sender: Any) {
         
 //        bucketListSilvia.append(TextFieldOutlet.text!)
         
         // TODO: add default initializer to BucketWishes class
-        var wishToAdd = BucketWishes.init(wish: wishTitle.text!, place: wishYear.text!, when: wishWhere.text!, id: "")
+        let wishToAdd = BucketWishes.init(wish: wishTitle.text!, place: wishYear.text!, when: wishWhere.text!, id: random())
         
         DataProvider.sharedInstance.addWish(wishToAdd)
         self.tableView.reloadData()
@@ -41,27 +59,11 @@ class TableViewControllerBucketList: UITableViewController {
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let nib = UINib(nibName: "bucketListTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "bucketListTableViewCell")
-        
-        // Register to receive notification data // Hieronder stemt Notification af op het keywoord "BucketWishesnotify".
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(TableViewControllerBucketList.notifyObservers),
-                                               name:  NSNotification.Name(rawValue: "BucketWishesnotify" ),
-                                               object: nil)
-        
-        ref = DataProvider.sharedInstance.getBucketListData()
-        self.addRemoveChild()
-    }
+
     
     func notifyObservers(notification: NSNotification) {
         var bucketlistDictionary: Dictionary<String,[BucketWishes]> = notification.userInfo as! Dictionary<String,[BucketWishes]>
-        bucketArray = bucketlistDictionary["BucketWishes"]! //showFestivalsOnMap()
-        
+        bucketArray = bucketlistDictionary["BucketWishes"]!
         self.tableView.reloadData()
     }
     
@@ -112,10 +114,6 @@ class TableViewControllerBucketList: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             DataProvider.sharedInstance.removeWish(bucketArray[indexPath.row])
-
-//            bucketArray.remove(at: indexPath.row)
-//            // Delete the row from the data source
-//            tableView.deleteRows(at: [indexPath], with: .fade)
 
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
