@@ -31,18 +31,29 @@ class TableViewControllerBucketList: UITableViewController {
                                                name:  NSNotification.Name(rawValue: "BucketWishesnotify" ),
                                                object: nil)
         
+        // Register to receive notification data // Hieronder stemt Notification af op het keywoord "BucketWishesnotify".
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(TableViewControllerBucketList.addChild),
+                                               name:  NSNotification.Name(rawValue: "AddChild" ),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(TableViewControllerBucketList.removeChild),
+                                               name:  NSNotification.Name(rawValue: "removeChild" ),
+                                               object: nil)
+        
+        
         ref = DataProvider.sharedInstance.getBucketListData()
-        self.addRemoveChild()
+        DataProvider.sharedInstance.setupAddRemoveChild()
     }
     
     @IBAction func AddWish(_ sender: Any) {
         
-//        bucketListSilvia.append(TextFieldOutlet.text!)
-        
         // TODO: add default initializer to BucketWishes class
         let wishToAdd = BucketWishes.init(wish: wishTitle.text!, place: wishYear.text!, when: wishWhere.text!, id: random())
-        
+        //adds to firebase
         DataProvider.sharedInstance.addWish(wishToAdd)
+        //reloading table causes firebase to reload
         self.tableView.reloadData()
     }
     
@@ -55,16 +66,6 @@ class TableViewControllerBucketList: UITableViewController {
             randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
         return randomString
-    }
-    
-    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    }
-
-    
-    func notifyObservers(notification: NSNotification) {
-        var bucketlistDictionary: Dictionary<String,[BucketWishes]> = notification.userInfo as! Dictionary<String,[BucketWishes]>
-        bucketArray = bucketlistDictionary["BucketWishes"]!
-        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,39 +121,32 @@ class TableViewControllerBucketList: UITableViewController {
         }    
     }
     
-    func addRemoveChild(){
-        
-        // Listen for new comments in the Firebase database
-        ref.observe(.childAdded, with: { (snapshot) -> Void in
-            if let wishObj = snapshot.value as? NSDictionary {
-                let bucketWish = BucketWishes.init(wish: wishObj["what"] as! String,
-                                                     place: wishObj["where"] as! String,
-                                                     when: wishObj["when"] as! String,
-                                                     id: snapshot.key)
-                self.bucketArray.append(bucketWish)
-                
-                self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
-                
-            }
-        })
-        
-        // TODO: Listen for deleted comments in the Firebase database
-        ref.observe(.childRemoved, with: { (snapshot) -> Void in
-            if let wishObj = snapshot.value as? NSDictionary {
-                let wishremoved = BucketWishes.init(wish: wishObj["what"] as! String,
-                                                   place: wishObj["where"] as! String,
-                                                   when: wishObj["when"] as! String,
-                                                   id: snapshot.key)
-                if let index = self.indexOfWish(wishRemoved: wishremoved) {
-                    self.bucketArray.remove(at: index)
-                    self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-                }
-                
-            }
-        })
-
+     // MARK: - Observer functions
+    
+    func notifyObservers(notification: NSNotification) {
+        var bucketlistDictionary: Dictionary<String,[BucketWishes]> = notification.userInfo as! Dictionary<String,[BucketWishes]>
+        bucketArray = bucketlistDictionary["BucketWishes"]!
+        self.tableView.reloadData()
     }
+    
+    func addChild(notification: NSNotification) {
+        var bucketlistDictionary: Dictionary<String,BucketWishes> = notification.userInfo as! Dictionary<String,BucketWishes>
+        bucketWish = bucketlistDictionary["AddedBucketWish"]!
 
+        self.bucketArray.append(bucketWish)
+        self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+    }
+    
+    func removeChild(notification: NSNotification) {
+        var bucketlistDictionary: Dictionary<String,BucketWishes> = notification.userInfo as! Dictionary<String,BucketWishes>
+        bucketWishRemoved = bucketlistDictionary["WishRemoved"]!
+
+        if let index = self.indexOfWish(wishRemoved: bucketWishRemoved) {
+            self.bucketArray.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    
     func indexOfWish(wishRemoved: BucketWishes) -> Int? {
         for (index, wish) in bucketArray.enumerated() {
             if  wish.id == wishRemoved.id {
@@ -161,5 +155,4 @@ class TableViewControllerBucketList: UITableViewController {
         }
         return nil
     }
-
 }

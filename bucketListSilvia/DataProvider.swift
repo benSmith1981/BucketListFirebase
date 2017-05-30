@@ -52,6 +52,39 @@ class DataProvider {
         return ref.child("wishes")
     }
    
+    func setupAddRemoveChild(){
+        
+        // Listen for new comments in the Firebase database
+        ref.observe(.childAdded, with: { (snapshot) -> Void in
+            if let wishObj = snapshot.value as? NSDictionary {
+                let bucketWish = BucketWishes.init(wish: wishObj["what"] as! String,
+                                                   place: wishObj["where"] as! String,
+                                                   when: wishObj["when"] as! String,
+                                                   id: snapshot.key)
+                let bucketWishDict = ["AddedBucketWish": bucketWish]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "AddChild"),
+                                                object: self ,
+                                                userInfo: bucketWishDict)
+            }
+        })
+        
+        // TODO: Listen for deleted comments in the Firebase database
+        ref.observe(.childRemoved, with: { (snapshot) -> Void in
+            if let wishObj = snapshot.value as? NSDictionary {
+                let wishremoved = BucketWishes.init(wish: wishObj["what"] as! String,
+                                                    place: wishObj["where"] as! String,
+                                                    when: wishObj["when"] as! String,
+                                                    id: snapshot.key)
+                let bucketRemovedDict = ["WishRemoved": wishremoved]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "removeChild"),
+                                                object: self ,
+                                                userInfo: bucketRemovedDict)
+                
+            }
+        })
+        
+    }
+    
     public func removeWish(_ newWish: BucketWishes) {
 
         guard let wishID = newWish.id else
