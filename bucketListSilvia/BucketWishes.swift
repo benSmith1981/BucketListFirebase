@@ -19,7 +19,7 @@ public class BucketWishes {
     public var id : String?
 
     
-    init(wish: String, place: String, when: String, id: String) {
+    init(wish: String = "" , place: String = "", when: String = "", id: String = "") {
         
         self.wish = wish
         self.when = when

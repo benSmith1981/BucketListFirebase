@@ -52,7 +52,7 @@ class DataProvider {
         return ref.child("wishes")
     }
    
-    func setupAddRemoveChild(){
+    func addChild(){
         
         // Listen for new comments in the Firebase database
         ref.observe(.childAdded, with: { (snapshot) -> Void in
@@ -68,6 +68,10 @@ class DataProvider {
             }
         })
         
+    }
+    
+    func removeChild() {
+        
         // TODO: Listen for deleted comments in the Firebase database
         ref.observe(.childRemoved, with: { (snapshot) -> Void in
             if let wishObj = snapshot.value as? NSDictionary {
@@ -82,9 +86,7 @@ class DataProvider {
                 
             }
         })
-        
     }
-    
     public func removeWish(_ newWish: BucketWishes) {
 
         guard let wishID = newWish.id else

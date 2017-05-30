@@ -44,15 +44,19 @@ class TableViewControllerBucketList: UITableViewController {
         
         
         ref = DataProvider.sharedInstance.getBucketListData()
-        DataProvider.sharedInstance.setupAddRemoveChild()
+        DataProvider.sharedInstance.addChild()
+        DataProvider.sharedInstance.removeChild()
+
+
     }
     
     @IBAction func AddWish(_ sender: Any) {
-        
+
         // TODO: add default initializer to BucketWishes class
         let wishToAdd = BucketWishes.init(wish: wishTitle.text!, place: wishYear.text!, when: wishWhere.text!, id: random())
         //adds to firebase
         DataProvider.sharedInstance.addWish(wishToAdd)
+
         //reloading table causes firebase to reload
         self.tableView.reloadData()
     }
@@ -131,7 +135,7 @@ class TableViewControllerBucketList: UITableViewController {
     
     func addChild(notification: NSNotification) {
         var bucketlistDictionary: Dictionary<String,BucketWishes> = notification.userInfo as! Dictionary<String,BucketWishes>
-        bucketWish = bucketlistDictionary["AddedBucketWish"]!
+        var bucketWish = bucketlistDictionary["AddedBucketWish"]  as! BucketWishes
 
         self.bucketArray.append(bucketWish)
         self.tableView.insertRows(at: [IndexPath(row: self.bucketArray.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
@@ -139,7 +143,7 @@ class TableViewControllerBucketList: UITableViewController {
     
     func removeChild(notification: NSNotification) {
         var bucketlistDictionary: Dictionary<String,BucketWishes> = notification.userInfo as! Dictionary<String,BucketWishes>
-        bucketWishRemoved = bucketlistDictionary["WishRemoved"]!
+        var bucketWishRemoved = bucketlistDictionary["WishRemoved"] as! BucketWishes
 
         if let index = self.indexOfWish(wishRemoved: bucketWishRemoved) {
             self.bucketArray.remove(at: index)
